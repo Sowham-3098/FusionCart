@@ -19,12 +19,12 @@ const HomePage = () => {
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   const newImages = [
-    "https://images.unsplash.com/photo-1605968758470-c6ff5308d3a6?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyNzMwNDF8MHwxfGFsbHwxfHx8fHx8fHwxNjcwNzE0OTAy&ixlib=rb-1.2.1&q=80&w=400",
-    "https://images.unsplash.com/photo-1527286618915-b7f2f64ec57f?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyNzMwNDF8MHwxfGFsbHwxfHx8fHx8fHwxNjcwNzE0OTAy&ixlib=rb-1.2.1&q=80&w=400",
-    "https://images.unsplash.com/photo-1572280492764-d54a3d441a08?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyNzMwNDF8MHwxfGFsbHwxfHx8fHx8fHwxNjcwNzE0OTAy&ixlib=rb-1.2.1&q=80&w=400",
-    "https://images.unsplash.com/photo-1518037867310-3e4dbe7efbb8?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyNzMwNDF8MHwxfGFsbHwxfHx8fHx8fHwxNjcwNzE0OTAy&ixlib=rb-1.2.1&q=80&w=400",
-    "https://images.unsplash.com/photo-1562058551-c9bb40e1b8a8?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyNzMwNDF8MHwxfGFsbHwxfHx8fHx8fHwxNjcwNzE0OTAy&ixlib=rb-1.2.1&q=80&w=400",
-    "https://images.unsplash.com/photo-1537847175807-7b29d5c2c99b?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyNzMwNDF8MHwxfGFsbHwxfHx8fHx8fHwxNjcwNzE0OTAy&ixlib=rb-1.2.1&q=80&w=400",
+   "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvdGhpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60",
+    "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2xvdGhpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60",
+    "https://images.unsplash.com/photo-1479064555552-3ef4979f8908?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGNsb3RoaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60",
+    "https://images.unsplash.com/photo-1506169894395-36397e4aaee4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGFjY2Vzc29yaWVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60",
+    "https://images.unsplash.com/photo-1608042314453-ae338d80c427?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=510&q=80",
+    "https://images.unsplash.com/photo-1576053139778-7e32f2ae3cfd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGFjY2Vzc29yaWVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
   ];
   
 
