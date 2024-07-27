@@ -1,6 +1,6 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
   Container,
@@ -10,6 +10,7 @@ import {
   CardActions,
   IconButton,
   Box,
+  Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
@@ -131,6 +132,14 @@ const CartPage = () => {
             >
               Total: ${total}
             </Typography>
+            <Link to="/checkout">
+              <Button
+                variant="contained"
+                sx={{ mt: '2rem', backgroundColor: Colors.primary }}
+              >
+                Proceed to Checkout
+              </Button>
+            </Link>
           </Box>
         </>
       )}

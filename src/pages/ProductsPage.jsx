@@ -10,6 +10,7 @@ import {
   Select,
   Grid,
   Paper,
+  TextField,
 } from "@mui/material";
 import { Colors } from "../styles/theme/theme";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,7 @@ import {
   filterProducts,
   sortProducts,
   setSortingOption,
+  setSearchTerm,
 } from "../features/products/ProductsSlice";
 import { PageContainer } from "../styles/page/containers";
 import ViewList from "@mui/icons-material/ViewList";
@@ -39,6 +41,8 @@ const ProductsPage = () => {
 
   const [sortingValue, setSortingValue] = useState("Top Rated");
   const [viewMode, setViewMode] = useState("grid"); // Default to grid view
+  const [searchTerm, setSearchTermState] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("all"); // Default to "all" filter
 
   const dispatch = useDispatch();
   const { filteredProducts, sortingOption } = useSelector(
@@ -53,21 +57,31 @@ const ProductsPage = () => {
     setViewMode((prevMode) => (prevMode === "grid" ? "list" : "grid"));
   };
 
+  const handleSearch = (event) => {
+    const searchValue = event.target.value;
+    setSearchTermState(searchValue);
+    dispatch(setSearchTerm(searchValue));
+  };
+
+  const handleFilterChange = (filter) => {
+    setSelectedFilter(filter.toLowerCase());
+  };
+
   useEffect(() => {
     dispatch(setSortingOption(sortingValue));
     dispatch(sortProducts());
   }, [sortingValue]);
 
   useEffect(() => {
+    dispatch(filterProducts(selectedFilter));
+  }, [selectedFilter, searchTerm, dispatch]);
+
+  useEffect(() => {
     dispatch(setSortingOption("Top Rated"));
-  }, []);
+  }, [dispatch]);
 
   return (
     <PageContainer>
-      <Typography variant="h3" sx={{ textAlign: "center", mb: "3rem", color: Colors.primary }}>
-        Shop by Category
-      </Typography>
-
       <Grid container spacing={2}>
         <Grid item xs={12} md={9}>
           {/* Products Section */}
@@ -82,57 +96,63 @@ const ProductsPage = () => {
             <Products viewMode={viewMode} /> {/* Pass viewMode prop to Products component */}
           </Box>
         </Grid>
-        
+
         <Grid item xs={12} md={3}>
-          {/* Filters Section */}
-          <Paper
-            sx={{
-              padding: '1rem',
-              borderRadius: '8px',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              backgroundColor: Colors.background,
-              height: "100%", // Ensure it takes full height
-            }}
-          >
-            <Typography variant="h6" sx={{ mb: "1rem", color: Colors.primary }}>
-              Filter by Category
+          <Paper sx={{ padding: "1rem" }}>
+            {/* Filter Section */}
+            <Typography variant="h6" sx={{ mb: "1rem", fontWeight: "bold" }}>
+              Filter Products
             </Typography>
-            {filterButtons.map((button, key) => (
-              <Button
-                key={key}
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              {filterButtons.map((filter, index) => (
+                <Button
+                  key={index}
+                  variant="contained"
+                  sx={{ bgcolor: Colors.primary, color: Colors.white }}
+                  onClick={() => handleFilterChange(filter)}
+                >
+                  {filter}
+                </Button>
+              ))}
+
+              {/* Sorting Section */}
+              <FormControl sx={{ minWidth: 120 }}>
+                <InputLabel>Sort By</InputLabel>
+                <Select value={sortingValue} onChange={handleChange}>
+                  {sortingOptions.map((option, index) => (
+                    <MenuItem key={index} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              {/* Search Section */}
+              <TextField
+                label="Search Products"
                 variant="outlined"
-                sx={{ margin: ".5rem", textTransform: "capitalize" }}
-                onClick={() => dispatch(filterProducts(button.toLowerCase()))}
-              >
-                {button}
-              </Button>
-            ))}
-            <FormControl
-              sx={{ minWidth: 160, mt: "1rem" }}
-              size="small"
-            >
-              <InputLabel>Sort By</InputLabel>
-              <Select
-                value={sortingValue}
-                onChange={handleChange}
-                label="Sort By"
-                sx={{ backgroundColor: Colors.white }}
-              >
-                {sortingOptions.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <Button
-              onClick={toggleViewMode}
-              sx={{ mt: "1rem", width: "100%" }}
-              variant="contained"
-              startIcon={viewMode === "grid" ? <ViewList /> : <ViewModule />}
-            >
-              {viewMode === "grid" ? "Switch to List View" : "Switch to Grid View"}
-            </Button>
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              
+              {/* View Toggle */}
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Button
+                  startIcon={<ViewModule />}
+                  onClick={toggleViewMode}
+                  disabled={viewMode === "grid"}
+                >
+                  Grid
+                </Button>
+                <Button
+                  startIcon={<ViewList />}
+                  onClick={toggleViewMode}
+                  disabled={viewMode === "list"}
+                >
+                  List
+                </Button>
+              </Box>
+            </Box>
           </Paper>
         </Grid>
       </Grid>
